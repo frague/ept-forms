@@ -16,10 +16,10 @@ section {
 
 table.primitives, table.epts {
   width: 500px !important;
-}
 
-table.primitives input, table.epts input {
-  width: 70px !important;
+  input {
+    width: 70px !important;
+  }
 }
 
 aside {

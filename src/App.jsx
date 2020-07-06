@@ -1,46 +1,46 @@
 import React from 'react';
 import {
-  BrowserRouter as Router,
   Switch,
   Route,
-  Link,
-  useRouteMatch,
-  useParams
+  useHistory
 } from 'react-router-dom';
 import 'semantic-ui-css/semantic.min.css';
-import './App.css';
-import { Selector } from './Selector';
-import { Icon, Button } from 'semantic-ui-react';
+import './App.scss';
 
+import { Icon, Button } from 'semantic-ui-react';
+import { Selector } from './Selector';
+import { Add } from './Add';
 
 function App() {
+  let history = useHistory();
   return (
-    <section>
-      <aside></aside>
-      <article>
-        <div className='buttons'>
-          <Button icon labelPosition='left'>
-            <Icon name='add circle' />
-            Add EPT
-          </Button>
-          <Button icon labelPosition='left'>
-            <Icon name='sitemap' />
-            Manage
-          </Button>
-          <Button icon labelPosition='left'>
-            <Icon name='upload' />
-            Export
-          </Button>
-        </div>
-        <Router>
+      <section>
+        <aside></aside>
+        <article>
+          <div className='buttons'>
+            <Button icon labelPosition='left' onClick={() => history.push("/add")}>
+              <Icon name='add circle' />
+              Add EPT
+            </Button>
+            <Button icon labelPosition='left'>
+              <Icon name='sitemap' />
+              Manage
+            </Button>
+            <Button icon labelPosition='left'>
+              <Icon name='upload' />
+              Export
+            </Button>
+          </div>
           <Switch>
+            <Route path="/add">
+              <Add />
+            </Route>
             <Route path="/">
               <Selector />
             </Route>
           </Switch>
-        </Router>
-      </article>
-    </section>
+       </article>
+      </section>
   );
 }
 
