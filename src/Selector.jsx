@@ -26,7 +26,7 @@ export function Selector() {
                     <Checkbox />
                   </Table.Cell>
                   <Table.Cell>{ ept.label }</Table.Cell>
-      						<Table.Cell>Cell</Table.Cell>
+      						<Table.Cell>Primitive</Table.Cell>
       						<Table.Cell textAlign="center" className="no-wrap">
                     <Button icon="edit" />
                     <Button icon="copy" />
