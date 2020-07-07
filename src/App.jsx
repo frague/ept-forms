@@ -8,8 +8,9 @@ import 'semantic-ui-css/semantic.min.css';
 import './App.scss';
 
 import { Icon, Button } from 'semantic-ui-react';
-import { Selector } from './Selector';
+import { Select } from './Select';
 import { Add } from './Add';
+import { Configure } from './Configure';
 
 function App() {
   let history = useHistory();
@@ -35,8 +36,11 @@ function App() {
             <Route path="/add">
               <Add />
             </Route>
+            <Route path="/configure">
+              <Configure />
+            </Route>
             <Route path="/">
-              <Selector />
+              <Select />
             </Route>
           </Switch>
        </article>

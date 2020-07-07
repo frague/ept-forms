@@ -42,7 +42,7 @@ export function Add() {
         </Form.Field>
         <div className="buttons">
           <Button onClick={ () => history.push('/') }>Cancel</Button>
-          <Button type='submit'>Submit</Button>
+          <Button onClick={ () => history.push('/configure')}>Next</Button>
         </div>
       </Form>
 		</div>

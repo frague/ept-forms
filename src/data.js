@@ -1,5 +1,6 @@
 export var epts = [
 	{
+		'id': 1,
 		'label': 'Subinterface',
 		'tags': [],
 		'node': '',
@@ -12,6 +13,7 @@ export var epts = [
 		'basic': true,
 	},
 	{
+		'id': 2,
 		'label': 'Attach VLAN',
 		'tags': [],
 		'node': '',
@@ -22,6 +24,7 @@ export var epts = [
 		'output_type': 'interface',
 	},
 	{
+		'id': 3,
 		'label': 'Address type',
 		'tags': [],
 		'node': '',
@@ -33,6 +36,7 @@ export var epts = [
 		'output_type': 'routable interface',
 	},
 	{
+		'id': 4,
 		'label': 'BGP unnumbered',
 		'tags': [],
 		'node': '',
@@ -43,6 +47,7 @@ export var epts = [
 		'output_type': 'interface',
 	},
 	{
+		'id': 5,
 		'label': 'Routing policy',
 		'tags': [],
 		'node': '',
