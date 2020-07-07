@@ -39,7 +39,7 @@ function App() {
             <Route path="/configure">
               <Configure />
             </Route>
-            <Route path="/">
+            <Route exact path="/">
               <Select />
             </Route>
           </Switch>

@@ -1,6 +1,7 @@
 export var epts = [
 	{
 		'id': 1,
+		'type': 'primitive',
 		'label': 'Subinterface',
 		'tags': [],
 		'node': '',
@@ -14,6 +15,7 @@ export var epts = [
 	},
 	{
 		'id': 2,
+		'type': 'primitive',
 		'label': 'Attach VLAN',
 		'tags': [],
 		'node': '',
@@ -25,6 +27,7 @@ export var epts = [
 	},
 	{
 		'id': 3,
+		'type': 'primitive',
 		'label': 'Address type',
 		'tags': [],
 		'node': '',
@@ -37,6 +40,7 @@ export var epts = [
 	},
 	{
 		'id': 4,
+		'type': 'primitive',
 		'label': 'BGP unnumbered',
 		'tags': [],
 		'node': '',
@@ -48,6 +52,7 @@ export var epts = [
 	},
 	{
 		'id': 5,
+		'type': 'primitive',
 		'label': 'Routing policy',
 		'tags': [],
 		'node': '',
@@ -56,5 +61,17 @@ export var epts = [
 		},
 		'input_types': ['routable interface'],
 		'output_type': 'routing session',
+	},
+	{
+		'id': 6,
+		'type': 'custom',
+		'label': 'Std2SI-BGP',
+		'tags': [],
+		'node': '',
+		'parameters': {
+			'some parameter': ''
+		},
+		'input_types': ['any'],
+		'output_type': 'any',
 	},
 ]

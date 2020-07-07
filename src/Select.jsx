@@ -56,20 +56,22 @@ export class Select extends React.Component {
   			    </Table.Header>
   			    <Table.Body>
               {
-                epts.map((ept, index) => 
-      		        <Table.Row key={ index }>
-      	        		<Table.Cell textAlign="center">
-                      <Checkbox onChange={ () => this.toggle(ept.id) } checked={ all || selection[ept.id] } />
-                    </Table.Cell>
-                    <Table.Cell>{ ept.label }</Table.Cell>
-        						<Table.Cell>Primitive</Table.Cell>
-        						<Table.Cell textAlign="center" className="no-wrap">
-                      <Button icon="edit" />
-                      <Button icon="copy" />
-                      <Button icon="trash" onClick={ () => this.delete(ept.id) } />
-                    </Table.Cell>
-        					</Table.Row>
-                )
+                epts
+                  .filter(ept => ept.type !== 'primitive')
+                  .map((ept, index) => 
+        		        <Table.Row key={ index }>
+        	        		<Table.Cell textAlign="center">
+                        <Checkbox onChange={ () => this.toggle(ept.id) } checked={ all || selection[ept.id] } />
+                      </Table.Cell>
+                      <Table.Cell>{ ept.label }</Table.Cell>
+          						<Table.Cell>{ ept.type }</Table.Cell>
+          						<Table.Cell textAlign="center" className="no-wrap">
+                        <Button icon="edit" />
+                        <Button icon="copy" />
+                        <Button icon="trash" onClick={ () => this.delete(ept.id) } />
+                      </Table.Cell>
+          					</Table.Row>
+                  )
               }
   			    </Table.Body>
   		    </Table>
