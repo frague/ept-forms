@@ -6,9 +6,7 @@ import { epts } from './data';
 function redirectToConfig(history, selection) {
   history.push({
     pathname: '/configure', 
-    state: {
-      selection: getSelection()
-    }
+    selection
   });
 }
 
@@ -44,18 +42,23 @@ export function Add() {
           <Table.Cell>{ ept.label }</Table.Cell>
           <Table.Cell collapsing>
             <Form.Field>
-              <Input placeholder='#' name={ ept.id } type="number" value={ selection[ept.id] || 0 } onChange={ (e, {value}) => changeAmount(ept, value) } />
+              <Input
+                placeholder='#'
+                name={ ept.id }
+                type="number"
+                value={ selection[ept.id] || 0 }
+                onChange={ (e, {value}) => changeAmount(ept, value) }
+                disabled={ !selection[ept.id] }
+              />
             </Form.Field>
           </Table.Cell>
         </Table.Row>
       );
   }
 
-  console.log('Rendering');
-
 	return (
 		<div>
-			<h1>Add EPT { Object.keys(selection) }</h1>
+			<h1>Add EPT</h1>
 			<Form>
         <Form.Field>
           <label>Name</label>
