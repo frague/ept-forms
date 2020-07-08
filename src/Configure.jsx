@@ -3,6 +3,8 @@ import { useLocation, useHistory } from "react-router-dom";
 import { Button, Table, Select } from 'semantic-ui-react';
 import { epts } from './data';
 
+import { ConfigurationModal } from './ConfigurationModal';
+
 function multiplyEpts(selection) {
   return Object.keys(selection).reduce((result, id) => {
     for (let i = 0, l = selection[id]; i < l; i++) {
@@ -43,7 +45,6 @@ export function Configure() {
   // let selection = location['selection'] || {};
   let listedEpts = multiplyEpts(selection);
   let availableTypes = gatherTypes(listedEpts);
-  console.log(availableTypes);
 
   return (
     <div>
@@ -60,7 +61,11 @@ export function Configure() {
                     <Select options={ generateAPs(name, listedEpts[name], availableTypes) } />
                   </Table.Cell>
                   <Table.Cell>
-                    Configure &rsaquo;
+                    <ConfigurationModal
+                      name={ name }
+                      epts={ listedEpts }
+                      callback={ parameters => listedEpts[name].parameters = parameters }
+                    />
                   </Table.Cell>
                 </Table.Row>
               )
