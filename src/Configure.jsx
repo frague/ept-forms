@@ -41,8 +41,8 @@ export function Configure() {
   const history = useHistory();
   const location = useLocation();
 
-  let selection = {1: 3, 2: 3, 3: 1} || location['selection'];
-  // let selection = location['selection'] || {};
+  // let selection = {1: 3, 2: 3, 3: 1} || location['selection'];
+  let selection = location['selection'] || {};
   let listedEpts = multiplyEpts(selection);
   let availableTypes = gatherTypes(listedEpts);
 
