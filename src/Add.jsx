@@ -58,7 +58,7 @@ export function Add() {
 
 	return (
 		<div>
-			<h1>Add EPT</h1>
+			<h1>Add EPT { JSON.stringify(selection) }</h1>
 			<Form>
         <Form.Field>
           <label>Name</label>
@@ -82,7 +82,10 @@ export function Add() {
         </Form.Field>
         <div className="buttons">
           <Button onClick={ () => history.push('/') }>Cancel</Button>
-          <Button onClick={ () => redirectToConfig(history, selection) }>Next</Button>
+          <Button
+            onClick={ () => redirectToConfig(history, selection) }
+            disabled={ !Object.keys(selection).length }
+          >Next</Button>
         </div>
       </Form>
 		</div>

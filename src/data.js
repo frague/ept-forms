@@ -63,7 +63,33 @@ export var epts = [
 		'output_type': 'routing session',
 	},
 	{
-		'id': 6,
+		'id': 7,
+		'type': 'primitive',
+		'label': 'IP Interface',
+		'tags': [],
+		'node': '',
+		'parameters': {
+			'type': {
+				'value': '',
+				'values': [
+					"IPv4",
+					"IPv6",
+					"IPv6 Link Local (auto)",
+				]
+			},
+			'allocation_scheme': {
+				'value': '',
+				'values': [
+					'Manual', 'AOS Pool'
+				]
+			},
+			'resource_pool': ''
+		},
+		'input_types': ['interface'],
+		'output_type': 'routable interface',
+	},
+	{
+		'id': 100,
 		'type': 'custom',
 		'label': 'Std2SI-BGP',
 		'tags': [],

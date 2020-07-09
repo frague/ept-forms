@@ -5,6 +5,10 @@ section {
   flex-direction: row;
 }
 
+a {
+  cursor: pointer;
+}
+
 .buttons {
   display: inline-block;
   float: right;
