@@ -26,19 +26,6 @@ export var epts = [
 		'output_type': 'interface',
 	},
 	{
-		'id': 3,
-		'type': 'primitive',
-		'label': 'Address type',
-		'tags': [],
-		'node': '',
-		'parameters': {
-			'IPv4': '',
-			'IPv6': ''
-		},
-		'input_types': ['interface', 'subinterface'],
-		'output_type': 'routable interface',
-	},
-	{
 		'id': 4,
 		'type': 'primitive',
 		'label': 'BGP unnumbered',
@@ -47,8 +34,8 @@ export var epts = [
 		'parameters': {
 			'timeout': ''
 		},
-		'input_types': ['interface', 'subinterface'],
-		'output_type': 'interface',
+		'input_types': ['routable interface'],
+		'output_type': 'routing session',
 	},
 	{
 		'id': 5,
@@ -59,13 +46,13 @@ export var epts = [
 		'parameters': {
 			'import/export': ''
 		},
-		'input_types': ['routable interface'],
-		'output_type': 'routing session',
+		'input_types': ['routing session'],
+		'output_type': 'routing policy',
 	},
 	{
 		'id': 7,
 		'type': 'primitive',
-		'label': 'IP Interface',
+		'label': 'Address Type',
 		'tags': [],
 		'node': '',
 		'parameters': {
@@ -85,7 +72,7 @@ export var epts = [
 			},
 			'resource_pool': ''
 		},
-		'input_types': ['interface'],
+		'input_types': ['interface', 'subinterface'],
 		'output_type': 'routable interface',
 	},
 	{

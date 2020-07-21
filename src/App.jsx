@@ -23,11 +23,11 @@ function App() {
               <Icon name='add circle' />
               Add EPT
             </Button>
-            <Button icon labelPosition='left'>
+            <Button icon labelPosition='left' disabled>
               <Icon name='sitemap' />
               Manage
             </Button>
-            <Button icon labelPosition='left'>
+            <Button icon labelPosition='left' disabled>
               <Icon name='upload' />
               Export
             </Button>

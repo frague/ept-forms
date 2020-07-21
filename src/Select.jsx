@@ -66,8 +66,8 @@ export class Select extends React.Component {
                     <Table.Cell>{ ept.label }</Table.Cell>
                     <Table.Cell>{ ept.type }</Table.Cell>
                     <Table.Cell textAlign="center" className="no-wrap">
-                      <Button icon="edit" />
-                      <Button icon="copy" />
+                      <Button icon="edit" disabled />
+                      <Button icon="copy" disabled />
                       <Button icon="trash" onClick={ () => this.delete(ept.id) } />
                     </Table.Cell>
                   </Table.Row>
