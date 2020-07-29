@@ -37,3 +37,30 @@ article {
   background: url(/top.png) no-repeat, url(/top_background.png) repeat-x;
   padding: 130px 30px 0 30px;
 }
+
+.application-points {
+  ul {
+    padding-left: 10px;
+    margin: 0;
+    
+    li {
+      margin: 0;
+      padding: 0;
+    }
+
+    li {
+      list-style: none;
+
+      div {
+        background-color: #EEE;
+        position: absolute;
+        left: 500px;
+        padding-right: 10px;
+
+        span {
+          margin-left: 10px;
+        }
+      }
+    }
+  }
+}

@@ -11,6 +11,7 @@ import { Icon, Button } from 'semantic-ui-react';
 import { Select } from './Select';
 import { Add } from './Add';
 import { Configure } from './Configure';
+import { ApplicationPoints } from './ApplicationPoints';
 
 function App() {
   let history = useHistory();
@@ -31,6 +32,10 @@ function App() {
               <Icon name='upload' />
               Export
             </Button>
+            <Button icon labelPosition='left' onClick={() => history.push("/aps")}>
+              <Icon name='eye' />
+              Application Points
+            </Button>
           </div>
           <Switch>
             <Route path="/add">
@@ -39,11 +44,15 @@ function App() {
             <Route path="/configure">
               <Configure />
             </Route>
+            <Route path="/aps">
+              <ApplicationPoints />
+            </Route>
             <Route exact path="/">
               <Select />
             </Route>
+
           </Switch>
-       </article>
+        </article>
       </section>
   );
 }
