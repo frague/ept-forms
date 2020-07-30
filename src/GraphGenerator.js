@@ -27,7 +27,7 @@ function generateLevel(types) {
 		return result;
 	}, {});
 	let meta = {};
-	if (Math.random() > 0.6) {
+	if (type === 'interface' && Math.random() > 0.6) {
 		meta = {
 			tags: ['tag1', 'tag3', 'tagXX'],
 			epts: ['ept1', 'ept5']
