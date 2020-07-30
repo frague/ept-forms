@@ -27,10 +27,10 @@ function generateLevel(types) {
 		return result;
 	}, {});
 	let meta = {};
-	if (type === 'interface' && Math.random() > 0.6) {
+	if (type === 'subinterface' && Math.random() > 0.3) {
 		meta = {
-			tags: ['tag1', 'tag3', 'tagXX'],
-			epts: ['ept1', 'ept5']
+			tags: ['red', 'green', 'blue', 'orange', 'magenta', 'brown', 'black'].filter(() => Math.random() > 0.3),
+			epts: ['VLAN10', 'VLAN20', 'Subif100', 'Subif200', 'Std2-SI-BGP'].filter(() => Math.random() > 0.6)
 		};
 	}
 	return { children, meta };

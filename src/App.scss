@@ -29,7 +29,7 @@ table.primitives, table.epts {
 aside {
   flex: 0 80px;
   background: #09293b url(/left.png) no-repeat;
-  height: 1024px;
+  min-height: 1024px;
 }
 
 article {
@@ -40,19 +40,15 @@ article {
 
 .application-points {
   ul {
-    padding-left: 10px;
+    padding: 20px 0 0 0;
     margin: 0;
+    clear: both;
     
     li {
       margin: 0;
       padding: 0;
       list-style: none;
-
-      @for $i from 0 through 5 {
-        &.l#{$i} {
-          padding-left: 15px * $i;
-        }
-      }
+      display: flex;
 
       &:nth-child(n + 2) {
         padding-top: 0px;
@@ -66,27 +62,61 @@ article {
         background-color: #FFF;
       }
 
-      div {
-        position: absolute;
-        left: 500px;
-        padding-right: 10px;
+      button {
+        background-color: transparent;
+        padding: 0;
+        border: 0;
+        cursor: pointer;
 
+        &:active, &:focus {
+          outline: none;
+        }
+      }
+
+      & > div {
+        &:first-child {
+          flex: 0 0 300px;
+
+          @for $i from 0 through 5 {
+            &.l#{$i} {
+              padding-left: 15px * $i;
+            }
+          }
+        }
+        
+        &:nth-child(2) {
+          flex: 1 0 300px;
+          display: flex;
+
+          span {
+            flex: 1 0;
+            margin-left: 10px;
+            padding: 0 4px 0 14px;
+
+            border: solid 1px #CCC;
+            border-width: 0 0 0 1px;
+
+            &:nth-child(3) {
+              flex: 0 1 100px;
+              padding: 0;
+              text-align: center;
+              white-space: nowrap;
+
+              div {
+                display: inline-block;
+              }
+
+              i {
+                position: absolute;
+              }
+            }
+          }
+        }
+        
         &.header {
           font-weight: bold;
         }
 
-        span {
-          min-width: 200px;
-          margin-left: 10px;
-          padding: 0 4px;
-          display: inline-block;
-
-          &:nth-child(n + 2) {
-            border: solid 1px #CCC;
-            border-width: 0 0 0 1px;
-            padding-left: 14px;
-          }
-        }
       }
     }
   }
