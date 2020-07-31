@@ -1,3 +1,5 @@
+import { storage } from './storage';
+
 const amounts = {
 	pod: 10,
 	rack: 20,
@@ -27,15 +29,16 @@ function generateLevel(types) {
 		return result;
 	}, {});
 	let meta = {};
-	if (type === 'subinterface' && Math.random() > 0.3) {
+	if (Math.random() > 0.3) {
 		meta = {
-			tags: ['red', 'green', 'blue', 'orange', 'magenta', 'brown', 'black'].filter(() => Math.random() > 0.3),
-			epts: ['VLAN10', 'VLAN20', 'Subif100', 'Subif200', 'Std2-SI-BGP'].filter(() => Math.random() > 0.6)
+			tags: ['red', 'green', 'blue', 'orange', 'magenta', 'brown', 'black'].filter(() => Math.random() > 0.8),
+			epts: ['VLAN10', 'VLAN20', 'Subif100', 'Subif200', 'Std2-SI-BGP'].filter(() => Math.random() > 0.95)
 		};
 	}
 	return { children, meta };
 }
 
 export const generate = () => {
+	storage.set('selection', {});
 	return generateLevel([...inheritance]);
 }
