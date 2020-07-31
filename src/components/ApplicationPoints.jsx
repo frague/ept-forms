@@ -1,15 +1,15 @@
-import React, { useState } from 'react';
-import { Icon, Form } from 'semantic-ui-react';
-import { generate } from './GraphGenerator';
+import React, { useState } from 'react'
+import { Icon, Form, Button } from 'semantic-ui-react'
+import { generate } from '../GraphGenerator'
 
-import { storage } from './storage';
+import Meta from '../containers/Meta'
 
-const selection = storage.get('selection', {});
 const data = generate();
 
-export const ApplicationPoints = () => {
+export const ApplicationPoints = ({selection}) => {
 	let [tags, setTags] = useState('');
 	let [epts, setEPTs] = useState('');
+	let hasSelection = Object.keys(selection).length > 0;
 
 	return <div className="application-points">
 		<ul>
@@ -33,6 +33,7 @@ export const ApplicationPoints = () => {
 			</li>
 			<Level data={ data } level={ 1 } name="Fabrique" filters={ [tags, epts] } />
 		</ul>
+		<Actions isDisabled={ !hasSelection } />
 	</div>
 }
 
@@ -77,33 +78,20 @@ const Level = ({data, level, name, filters}) => {
 								{ key }
 							</button>
 						</div>
-						<Meta data={ nextLevel.meta } path={ id } />
+						<Meta data={ nextLevel } path={ id } />
 					</li>,
 					isExpanded ? <Level key={ key } data={ nextLevel } level={ 1 + level } name={ id } filters={ filters } /> : null
 				]
 			}) || null;
 }
 
-function select(path, state) {
-	if (state) selection[path] = state
-	else delete selection[path];
-}
-
-const Meta = ({data, path}) => {
-	let [isSelected, setSelection] = useState(false);
-
-	if (!data || Object.keys(data).length === 0) {
-		data = {
-			tags: [],
-			epts: []
-		};
-	}
-	return <div>
-		<span>{ data.tags.join(', ') }</span>
-		<span>{ data.epts.join(', ') }</span>
-		<span>
-			<Form.Checkbox checked={ isSelected } onChange={ () => {setSelection(!isSelected); select(path, !isSelected)} } />
-			{ isSelected && <Icon name="triangle down" /> }
-		</span>
+const Actions = ({isDisabled}) => {
+	return <div className="actions">
+		<Form>
+			<Form.Group inline>
+				<Form.Select label="With selected: " options={ [{text: 'Apply EPT', value: 1}] } disabled={ isDisabled } />
+				<Button disabled={ isDisabled }>Apply</Button>
+			</Form.Group>
+		</Form>
 	</div>
 }

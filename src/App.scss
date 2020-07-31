@@ -98,7 +98,7 @@ article {
 
             &:nth-child(3) {
               flex: 0 1 100px;
-              padding-left: 0;
+              padding: 2px 0 0 0;
               text-align: center;
               white-space: nowrap;
 
@@ -113,6 +113,8 @@ article {
 
               &:hover i {
                 display: inline-block;
+                cursor: pointer;
+                height: 20px;
               }
             }
           }
@@ -144,6 +146,33 @@ article {
           }
         }
       }
+    }
+  }
+
+  div.menu {
+    position: absolute;
+
+    ul {
+      border: solid 1px #AAA;
+      font-size: 10px;
+      padding: 4px;
+      background-color: #FFF;
+      z-index: 100;
+      display: none;
+      position: absolute;
+      bottom: -50px;
+      left: -50px;
+    }
+
+    &:hover ul {
+      display: block;
+    }
+  }
+
+  .actions {
+    margin-top: 10px;
+    .inline.fields {
+      justify-content: flex-end;
     }
   }
 }

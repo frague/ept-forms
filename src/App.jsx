@@ -1,21 +1,27 @@
-import React from 'react';
+import React from 'react'
+import { createStore } from 'redux'
+import { Provider } from 'react-redux'
 import {
   Switch,
   Route,
   useHistory
 } from 'react-router-dom';
-import 'semantic-ui-css/semantic.min.css';
-import './App.scss';
+import 'semantic-ui-css/semantic.min.css'
+import './App.scss'
+import selectionReducer from './store/reducers'
 
 import { Icon, Button } from 'semantic-ui-react';
 import { Select } from './Select';
 import { Add } from './Add';
 import { Configure } from './Configure';
-import { ApplicationPoints } from './ApplicationPoints';
+import ApplicationPoints from './containers/ApplicationPoints';
+
+const store = createStore(selectionReducer);
 
 function App() {
   let history = useHistory();
   return (
+    <Provider store={ store }>
       <section>
         <aside></aside>
         <article>
@@ -54,6 +60,7 @@ function App() {
           </Switch>
         </article>
       </section>
+    </Provider>
   );
 }
 
