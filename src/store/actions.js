@@ -1,5 +1,6 @@
 export const SELECT_ITEM = 'SELECT_ITEM';
 export const SELECT_CHILDREN = 'SELECT_CHILDREN';
+export const TRANSFER_EPTS = 'TRANSFER_EPTS';
 
 export function selectItem(id, state) {
 	return {
@@ -13,4 +14,11 @@ export function selectChildren(structure, id, state) {
 		type: SELECT_CHILDREN,
 		structure, id, state
 	};
+}
+
+export function transferEPTs(data, fromPath, toPath) {
+	return {
+		type: TRANSFER_EPTS,
+		data, fromPath, toPath
+	}
 }

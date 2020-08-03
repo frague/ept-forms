@@ -4,6 +4,7 @@ import { Meta } from '../components/Meta'
 
 const mapStateToProps = state => {
   return {
+    data: state.data,
     selection: state.selection
   }
 }

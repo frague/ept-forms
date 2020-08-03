@@ -1,40 +1,42 @@
 import React, { useState } from 'react'
 import { Icon, Form, Button } from 'semantic-ui-react'
-import { generate } from '../GraphGenerator'
 
 import Meta from '../containers/Meta'
 
-const data = generate();
-
-export const ApplicationPoints = ({selection}) => {
+export const ApplicationPoints = ({selection, data}) => {
 	let [tags, setTags] = useState('');
 	let [epts, setEPTs] = useState('');
 	let hasSelection = Object.keys(selection).length > 0;
 
-	return <div className="application-points">
-		<ul>
-			<li className="header">
-				<div>
-					<Icon name="folder open" /> <strong>Fabrique</strong>
-				</div>
-				<div>
-					<span>
-						<Form.Input name="tags"
-							label="Tags" placeholder="Filter by Tag" 
-							onChange={ (e, {value}) => setTags(value) } />
-					</span>
-					<span>
-						<Form.Input name="epts" 
-							label="Templates Applied" placeholder="Filter by EPT"
-							onChange={ (e, {value}) => setEPTs(value) } />
-					</span>
-					<span>Selection</span>
-				</div>
-			</li>
-			<Level data={ data } level={ 1 } name="Fabrique" filters={ [tags, epts] } />
-		</ul>
-		<Actions isDisabled={ !hasSelection } />
-	</div>
+	let selected = Object.keys(selection).length || 'No';
+
+	return [
+		<h1>{ selected } node{ selected !== 1 ? 's' : '' } selected</h1>,
+		<div className="application-points">
+			<ul>
+				<li className="header">
+					<div>
+						<Icon name="folder open" /> <strong>Fabrique</strong>
+					</div>
+					<div>
+						<span>Selection</span>
+						<span>
+							<Form.Input name="epts" 
+								label="Templates Applied" placeholder="Filter by EPT"
+								onChange={ (e, {value}) => setEPTs(value) } />
+						</span>
+						<span>
+							<Form.Input name="tags"
+								label="Tags" placeholder="Filter by Tag" 
+								onChange={ (e, {value}) => setTags(value) } />
+						</span>
+					</div>
+				</li>
+				<Level data={ data } level={ 1 } name="Fabrique" filters={ [tags, epts] } />
+			</ul>
+			<Actions isDisabled={ !hasSelection } />
+		</div>
+	]
 }
 
 function isFiteredIn(data, tags, epts) {
@@ -51,7 +53,7 @@ const Level = ({data, level, name, filters}) => {
 
 	let hasFilters = filters && (filters[0] || filters[1]);
 
-	let children = data.children;
+	let children = data.children || {};
 	if ((filters[0] !== '' || filters[1] !== '')) {
 		children = Object.entries(data.children).reduce((result, [key, value]) => {
 			if (isFiteredIn(value, ...filters)) {
@@ -61,7 +63,7 @@ const Level = ({data, level, name, filters}) => {
 		}, {});
 	}
 
-	let keys = Object.keys(children || {});
+	let keys = Object.keys(children);
 	if (!keys.length) return null;
 
 	return keys
@@ -78,9 +80,9 @@ const Level = ({data, level, name, filters}) => {
 								{ key }
 							</button>
 						</div>
-						<Meta data={ nextLevel } path={ id } />
+						<Meta nodeData={ nextLevel } path={ id } />
 					</li>,
-					isExpanded ? <Level key={ key } data={ nextLevel } level={ 1 + level } name={ id } filters={ filters } /> : null
+					isExpanded ? <Level data={ nextLevel } level={ 1 + level } name={ id } filters={ filters } /> : null
 				]
 			}) || null;
 }

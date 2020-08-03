@@ -34,7 +34,7 @@ export function ConfigurationModal({epts={}, name='', callback=() => {}}) {
   const [isOpen, setVisibility] = useState(false);
   return (
     <Modal
-      trigger={<a onClick={ () => setVisibility(true) }>Configure <Icon name='chevron right' /></a>}
+      trigger={<Button onClick={ () => setVisibility(true) }>Configure <Icon name='chevron right' /></Button>}
       size='tiny'
       dimmer='inverted'
       onClose={ () => {

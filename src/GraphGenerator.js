@@ -1,5 +1,3 @@
-import { storage } from './storage';
-
 const amounts = {
 	pod: 10,
 	rack: 20,
@@ -20,12 +18,16 @@ const inheritance = [
 	// 'routing policy'
 ];
 
-function generateLevel(types) {
+function generateLevel(currentType, types) {
 	let type = types.shift();
-	if (!type) return {};
+	if (!type) return {
+		meta: {
+			type: currentType
+		}
+	};
 
 	let children = [...Array(amounts[type])].reduce((result, x, index) => {
-		result[`${type}${ ('000' + (index + 1)).substr(-3) }`] = generateLevel([...types]);
+		result[`${type}${ ('000' + (index + 1)).substr(-3) }`] = generateLevel(type, [...types]);
 		return result;
 	}, {});
 	let meta = {};
@@ -35,10 +37,28 @@ function generateLevel(types) {
 			epts: ['VLAN10', 'VLAN20', 'Subif100', 'Subif200', 'Std2-SI-BGP'].filter(() => Math.random() > 0.95)
 		};
 	}
+	meta.type = currentType;
 	return { children, meta };
 }
 
+export const deepClone = (source, prefix, find=[], found={}) => {
+	let meta = source.meta || {};
+	return {
+		meta: {
+			epts: [...(meta.epts || [])],
+			tags: [...(meta.tags || [])],
+			type: meta.type
+		},
+		children: Object.entries(source.children || {}).reduce((result, [name, value]) => {
+			let path = `${prefix}.${name}`;
+			let cloned = deepClone(value, path, find, found);
+			if (find.includes(path)) found[path] = cloned;
+			result[name] = cloned;
+			return result;
+		}, {})
+	};
+}
+
 export const generate = () => {
-	storage.set('selection', {});
-	return generateLevel([...inheritance]);
+	return generateLevel(null, [...inheritance]);
 }

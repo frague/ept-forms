@@ -4,7 +4,7 @@ import { SelectionMenu } from '../components/SelectionMenu'
 
 const mapDispatchToProps = dispatch => {
   return {
-    onSelectClick: (structure, id, state) => {
+    onSelectChildrenClick: (structure, id, state) => {
       dispatch(selectChildren(structure, id, state))
     }
   }

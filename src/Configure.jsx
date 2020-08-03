@@ -7,7 +7,7 @@ import { ConfigurationModal } from './ConfigurationModal';
 
 function multiplyEpts(selection) {
   return Object.keys(selection).reduce((result, id) => {
-    let ept = (epts.filter(ept => ept.id == id) || [null])[0];
+    let ept = (epts.filter(ept => `${ept.id}` === `${id}`) || [null])[0];
     if (!ept) throw new Error(`Unable to find EPT ID:${id}`);
 
     let label = ept.label;

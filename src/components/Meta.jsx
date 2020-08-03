@@ -1,27 +1,33 @@
 import React, { useState } from 'react'
-import { Icon, Form } from 'semantic-ui-react'
+import { Form } from 'semantic-ui-react'
 import SelectionMenu from '../containers/SelectionMenu'
+import TransferMenu from '../containers/TransferMenu'
 
-export const Meta = ({data, path, selection, onSelectClick}) => {
-	let [isMenuShown, toggleMenu] = useState(false);
+export const Meta = ({data, nodeData, path, selection, onSelectClick}) => {
+	let [ isHovered, setHoverage ] = useState(false);
+	let { meta } = nodeData;
 
-	let { children, meta } = data;
+	let isSelected = selection.hasOwnProperty(path);
 
-	if (!meta || Object.keys(meta).length === 0) {
-		meta = {
-			tags: [],
-			epts: []
-		};
-	}
+	let selected = Object.keys(selection);
+	let firstSelected = selected.length > 0 ? selected[0] : null;
 
-	let isSelected = !!selection[path];
+	let canTransferEPTs = !isSelected &&
+		selected.length === 1 &&
+		selection[firstSelected] === meta.type &&
+		meta.epts &&
+		meta.epts.length > 0;
 
 	return <div>
-		<span>{ meta.tags.join(', ') }</span>
-		<span>{ meta.epts.join(', ') }</span>
-		<span>
-			<Form.Checkbox checked={ isSelected } onChange={ () => onSelectClick(path, !isSelected) } />
-			<SelectionMenu data={ data } prefix={ path } />
+		<span onMouseOver={ () => setHoverage(true) } onMouseLeave={ () => setHoverage(false) }>
+			<Form.Checkbox checked={ isSelected } onChange={ () => onSelectClick(path, isSelected ? false : meta.type) } />
+			{ isHovered && <SelectionMenu data={ nodeData } prefix={ path } /> }
 		</span>
+		<span>
+			{ (meta.epts || []).join(', ') }
+			{ canTransferEPTs && <TransferMenu fromPath={ path } toPath={ firstSelected } /> }
+			
+		</span>
+		<span>{ (meta.tags || []).join(', ') }</span>
 	</div>
 }
