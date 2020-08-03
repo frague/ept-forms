@@ -18,6 +18,16 @@ const inheritance = [
 	// 'routing policy'
 ];
 
+export const applicableEpts = {
+	'pod': [],
+	'rack': [],
+	'leaf': [],
+	'interface': ['VLAN10', 'VLAN20', 'Std2-SI-BGP', 'Subif100', 'Subif200', 'IPv6-unnum'],
+	'subinterface': ['IPv6-unnum'],
+	'routing session': [],
+	'routing policy': []
+};
+
 function generateLevel(currentType, types) {
 	let type = types.shift();
 	if (!type) return {
@@ -33,8 +43,8 @@ function generateLevel(currentType, types) {
 	let meta = {};
 	if (Math.random() > 0.3) {
 		meta = {
-			tags: ['red', 'green', 'blue', 'orange', 'magenta', 'brown', 'black'].filter(() => Math.random() > 0.8),
-			epts: ['VLAN10', 'VLAN20', 'Subif100', 'Subif200', 'Std2-SI-BGP'].filter(() => Math.random() > 0.95)
+			tags: ['red', 'green', 'blue', 'orange', 'magenta', 'brown', 'black'].filter(() => Math.random() > 0.9),
+			epts: (applicableEpts[currentType] || []).filter(() => Math.random() > 0.5)
 		};
 	}
 	meta.type = currentType;

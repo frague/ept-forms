@@ -1,4 +1,4 @@
-import { SELECT_ITEM, SELECT_CHILDREN, TRANSFER_EPTS } from './actions';
+import { SELECT_ITEM, SELECT_CHILDREN, TRANSFER_EPTS, APPLY_EPT, FLUSH_EPTS } from './actions';
 import { generate, deepClone } from '../GraphGenerator'
 
 const initialState = {
@@ -47,7 +47,10 @@ function selectionReducer(state=initialState, action) {
 			let data = deepClone(action.data, 'Fabrique', [fromPath, toPath], found);
 			
 			try {
-				found[toPath].meta.epts.push(...found[fromPath].meta.epts);
+				let existing = found[toPath].meta.epts;
+				found[fromPath].meta.epts.forEach(ept => {
+					if (!existing.includes(ept)) existing.push(ept);
+				});
 				found[fromPath].meta.epts = [];
 			} catch (e) {
 				console.log('Unable to transfer EPTs');
@@ -57,6 +60,41 @@ function selectionReducer(state=initialState, action) {
 				{},
 				state,
 				{ data }
+			);
+
+		case APPLY_EPT:
+			let found1 = {};
+			let data1 = deepClone(action.data, 'Fabrique', Object.keys(action.selection), found1);
+			let ept = action.ept;
+			try {
+				Object.values(found1).forEach(({meta}) => {
+					let epts = meta.epts || [];
+					if (!epts.includes(ept)) epts.push(ept);
+					meta.epts = epts;
+				})
+			} catch (e) {
+				console.log('Unable to apply EPT');
+			}
+
+			return Object.assign(
+				{},
+				state,
+				{ data: data1 }
+			);
+
+		case FLUSH_EPTS:
+			let found2 = {};
+			let data2 = deepClone(action.data, 'Fabrique', Object.keys(action.selection), found2);
+			try {
+				Object.values(found2).forEach(({meta}) => meta.epts = [])
+			} catch (e) {
+				console.log('Unable to flush EPTs');
+			}
+
+			return Object.assign(
+				{},
+				state,
+				{ data: data2 }
 			);
 
 		default:

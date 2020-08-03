@@ -96,9 +96,10 @@ article {
             border: solid 1px #CCC;
             border-width: 0 0 0 1px;
 
-            &:nth-child(1) {
-              flex: 0 1 100px;
-              padding: 2px -10px 0 0;
+            &:first-child {
+              flex: 0 1 80px;
+              padding: 2px 0 0 0;
+              margin-right: -10px;
               text-align: center;
               white-space: nowrap;
 
@@ -116,6 +117,9 @@ article {
                 }
               }
 
+            }
+            &:nth-child(2) {
+              flex: 1 0 400px;
             }
           }
         }

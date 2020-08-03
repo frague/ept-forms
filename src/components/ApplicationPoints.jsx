@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
-import { Icon, Form, Button } from 'semantic-ui-react'
+import { Icon, Form } from 'semantic-ui-react'
 
 import Meta from '../containers/Meta'
+import Actions from '../containers/Actions'
 
 export const ApplicationPoints = ({selection, data}) => {
 	let [tags, setTags] = useState('');
@@ -32,9 +33,9 @@ export const ApplicationPoints = ({selection, data}) => {
 						</span>
 					</div>
 				</li>
-				<Level data={ data } level={ 1 } name="Fabrique" filters={ [tags, epts] } />
+				<Level key="top" data={ data } level={ 1 } name="Fabrique" filters={ [tags, epts] } />
 			</ul>
-			<Actions isDisabled={ !hasSelection } />
+			<Actions isDisabled={ !hasSelection } selection={ selection } />
 		</div>
 	]
 }
@@ -82,18 +83,8 @@ const Level = ({data, level, name, filters}) => {
 						</div>
 						<Meta nodeData={ nextLevel } path={ id } />
 					</li>,
-					isExpanded ? <Level data={ nextLevel } level={ 1 + level } name={ id } filters={ filters } /> : null
+					isExpanded ? <Level key={ `${id}.${level} level` } data={ nextLevel } level={ 1 + level } name={ id } filters={ filters } /> : null
 				]
 			}) || null;
 }
 
-const Actions = ({isDisabled}) => {
-	return <div className="actions">
-		<Form>
-			<Form.Group inline>
-				<Form.Select label="With selected: " options={ [{text: 'Apply EPT', value: 1}] } disabled={ isDisabled } />
-				<Button disabled={ isDisabled }>Apply</Button>
-			</Form.Group>
-		</Form>
-	</div>
-}
