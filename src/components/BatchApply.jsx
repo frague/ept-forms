@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Icon, Form } from 'semantic-ui-react'
 
-import Meta from '../containers/Meta'
+import { Epts } from '../components/Epts'
 import Actions from '../containers/Actions'
 
 export const BatchApply = ({selection, data, selectedEpts}) => {
@@ -10,31 +10,23 @@ export const BatchApply = ({selection, data, selectedEpts}) => {
 	let hasSelection = Object.keys(selection).length > 0;
 
 	let selected = Object.keys(selection).length || 'No';
-	console.log(selectedEpts);
 
 	return [
 		<h1>{ selected } node{ selected !== 1 ? 's' : '' } selected</h1>,
 		<div className="application-points">
-			<ul>
+			<ul className="epts">
 				<li className="header">
 					<div>
 						<Icon name="folder open" /> <strong>Fabrique</strong>
 					</div>
 					<div>
-						<span>Selection</span>
-						<span>
-							<Form.Input name="epts" 
-								label="Templates Applied" placeholder="Filter by EPT"
-								onChange={ (e, {value}) => setEPTs(value) } />
-						</span>
-						<span>
-							<Form.Input name="tags"
-								label="Tags" placeholder="Filter by Tag" 
-								onChange={ (e, {value}) => setTags(value) } />
-						</span>
+						<span>Tags</span>
+						{
+							selectedEpts.map(ept => <span>{ ept }</span>)
+						}
 					</div>
 				</li>
-				<Level key="top" data={ data } level={ 1 } name="Fabrique" filters={ [tags, epts] } />
+				<Level key="top" data={ data } level={ 1 } name="Fabrique" epts={ selectedEpts } />
 			</ul>
 			<Actions isDisabled={ !hasSelection } selection={ selection } />
 		</div>
@@ -50,20 +42,10 @@ function isFiteredIn(data, tags, epts) {
 	return Object.entries(data.children).some(([key, value]) => isFiteredIn(value, tags, epts));
 }
 
-const Level = ({data, level, name, filters}) => {
+const Level = ({data, level, name, epts}) => {
 	let [state, setState] = useState({});
 
-	let hasFilters = filters && (filters[0] || filters[1]);
-
 	let children = data.children || {};
-	if ((filters[0] !== '' || filters[1] !== '')) {
-		children = Object.entries(data.children).reduce((result, [key, value]) => {
-			if (isFiteredIn(value, ...filters)) {
-				result[key] = value;
-			}
-			return result;
-		}, {});
-	}
 
 	let keys = Object.keys(children);
 	if (!keys.length) return null;
@@ -72,7 +54,7 @@ const Level = ({data, level, name, filters}) => {
 			.sort()
 			.map(key => {
 				let nextLevel = children[key];
-				let isExpanded = hasFilters || state[key] || false;
+				let isExpanded = state[key] || false;
 				let id = `${name}.${key}`;
 				return [
 					<li key={ id }>
@@ -82,9 +64,9 @@ const Level = ({data, level, name, filters}) => {
 								{ key }
 							</button>
 						</div>
-						<Meta nodeData={ nextLevel } path={ id } />
+						<Epts epts={ epts } tags={ ['tag1', 'tag2' ] } />
 					</li>,
-					isExpanded ? <Level key={ `${id}.${level} level` } data={ nextLevel } level={ 1 + level } name={ id } filters={ filters } /> : null
+					isExpanded ? <Level key={ `${id}.${level} level` } data={ nextLevel } level={ 1 + level } name={ id } epts={ epts } /> : null
 				]
 			}) || null;
 }
