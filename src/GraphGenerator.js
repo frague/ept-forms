@@ -28,6 +28,15 @@ export const applicableEpts = {
 	'routing policy': []
 };
 
+export const eptsTypes = {
+	'VLAN10': ['interface'],
+	'VLAN20': ['interface'],
+	'Std2-SI-BGP': ['interface'],
+	'Subif100': ['interface'],
+	'Subif200': ['interface'],
+	'IPv6-unnum': ['interface', 'subinterface']
+};
+
 function generateLevel(currentType, types) {
 	let type = types.shift();
 	if (!type) return {

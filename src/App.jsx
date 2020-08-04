@@ -26,17 +26,13 @@ function App() {
         <aside></aside>
         <article>
           <div className='buttons'>
+            <Button icon labelPosition='left' disabled>
+              <Icon name='sitemap' />
+              Batch Apply
+            </Button>
             <Button icon labelPosition='left' onClick={() => history.push("/add")}>
               <Icon name='add circle' />
               Add EPT
-            </Button>
-            <Button icon labelPosition='left' disabled>
-              <Icon name='sitemap' />
-              Manage
-            </Button>
-            <Button icon labelPosition='left' disabled>
-              <Icon name='upload' />
-              Export
             </Button>
             <Button icon labelPosition='left' onClick={() => history.push("/aps")}>
               <Icon name='eye' />
