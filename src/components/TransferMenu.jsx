@@ -8,7 +8,7 @@ export const TransferMenu = ({ data, fromPath, toPath, transferEPTsClick }) => {
 		<Icon name="triangle down" onClick={ () => setExpansion(!isExpanded) } />
 		{ isExpanded && <ul>
 			<li>
-				<button onClick={ () => transferEPTsClick(data, fromPath, toPath) }>Transfer EPTs to the selected node</button>
+				<button onClick={ () => transferEPTsClick(fromPath, toPath) }>Transfer EPTs to the selected node</button>
 			</li>
 		</ul> }
 	</div>

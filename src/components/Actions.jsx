@@ -17,8 +17,8 @@ export const Actions = ({isDisabled, data, selection, flushEpts, applyEpt}) => {
 	}, {}));
 
 	let executors = {
-		apply: () => applyEpt(data, selection, ept),
-		flush: () => flushEpts(data, selection)
+		apply: () => applyEpt(selection, ept),
+		flush: () => flushEpts(selection)
 	};
 
 	return <div className="actions">

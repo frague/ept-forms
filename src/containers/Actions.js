@@ -11,11 +11,11 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    applyEpt: (data, selection, ept) => {
-      dispatch(applyEPT(data, selection, ept))
+    applyEpt: (selection, ept) => {
+      dispatch(applyEPT(selection, ept))
     },
-    flushEpts: (data, selection) => {
-      dispatch(flushEPTs(data, selection))
+    flushEpts: (selection) => {
+      dispatch(flushEPTs(selection))
     }
   }
 }

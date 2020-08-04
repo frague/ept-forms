@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Table, Button, Checkbox } from 'semantic-ui-react'
-import { eptsTypes } from './GraphGenerator'
+import { eptsTypes } from '../GraphGenerator'
 
 const initialState = {
   selection: {},

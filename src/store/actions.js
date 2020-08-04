@@ -18,23 +18,23 @@ export function selectChildren(structure, id, state) {
 	};
 }
 
-export function transferEPTs(data, fromPath, toPath) {
+export function transferEPTs(fromPath, toPath) {
 	return {
 		type: TRANSFER_EPTS,
-		data, fromPath, toPath
+		fromPath, toPath
 	}
 }
 
-export function applyEPT(data, selection, ept) {
+export function applyEPT(selection, ept) {
 	return {
 		type: APPLY_EPT,
-		data, selection, ept
+		selection, ept
 	}
 }
 
-export function flushEPTs(data, selection, ept) {
+export function flushEPTs(selection, ept) {
 	return {
 		type: FLUSH_EPTS,
-		data, selection
+		selection
 	}
 }

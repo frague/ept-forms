@@ -10,8 +10,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    transferEPTsClick: (data, fromPath, toPath) => {
-      dispatch(transferEPTs(data, fromPath, toPath))
+    transferEPTsClick: (fromPath, toPath) => {
+      dispatch(transferEPTs(fromPath, toPath))
     }
   }
 }

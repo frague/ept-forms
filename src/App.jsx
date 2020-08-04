@@ -11,7 +11,7 @@ import './App.scss'
 import selectionReducer from './store/reducers'
 
 import { Icon, Button } from 'semantic-ui-react';
-import { Select } from './Select';
+import { Select } from './components/Select';
 import { Add } from './Add';
 import { Configure } from './Configure';
 import ApplicationPoints from './containers/ApplicationPoints';
