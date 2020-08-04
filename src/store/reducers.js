@@ -71,7 +71,6 @@ function data(state=generate(), action) {
 function selectedEpts(state=[], action) {
 switch (action.type) {
 	case SELECT_EPT:
-		console.log(action);
 		let selectedEpts = [...state];
 		let index = selectedEpts.indexOf(action.ept);
 		if (index >= 0) {
