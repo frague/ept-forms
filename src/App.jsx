@@ -4,11 +4,13 @@ import { Provider } from 'react-redux'
 import { Switch, Route } from 'react-router-dom';
 import appReducer from './store/reducers'
 
+import Navigation from './containers/Navigation'
+
 import Select from './containers/Select'
 import { Add } from './Add'
 import { Configure } from './Configure'
 import ApplicationPoints from './containers/ApplicationPoints'
-import Navigation from './containers/Navigation'
+import BatchApply from './containers/BatchApply'
 
 import 'semantic-ui-css/semantic.min.css'
 import './App.scss'
@@ -31,6 +33,9 @@ function App() {
             </Route>
             <Route path="/aps">
               <ApplicationPoints />
+            </Route>
+            <Route path="/batch">
+              <BatchApply />
             </Route>
             <Route exact path="/">
               <Select />
