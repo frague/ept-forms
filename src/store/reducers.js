@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux';
 
-import { SELECT_ITEM, SELECT_CHILDREN, TRANSFER_EPTS, APPLY_EPT, FLUSH_EPTS } from './actions';
+import { SELECT_ITEM, SELECT_CHILDREN, TRANSFER_EPTS, APPLY_EPT, 
+	FLUSH_EPTS, SELECT_EPT, SELECT_ALL_EPTS } from './actions';
 import { generate, deepClone } from '../GraphGenerator'
 
 function setState(structure, prefix, state, result, doRecursively=true) {
@@ -69,6 +70,24 @@ function data(state=generate(), action) {
 
 function selectedEpts(state=[], action) {
 switch (action.type) {
+	case SELECT_EPT:
+		console.log(action);
+		let selectedEpts = [...state];
+		let index = selectedEpts.indexOf(action.ept);
+		if (index >= 0) {
+			if (!action.state) {
+				selectedEpts.splice(index, 1);
+			}
+		} else {
+			if (action.state) {
+				selectedEpts.push(action.ept);
+			}
+		}
+		return selectedEpts;
+
+	case SELECT_ALL_EPTS:
+		return action.state ? [...action.epts] : [];
+
 	default:
 		return state;
 	}
