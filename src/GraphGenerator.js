@@ -52,7 +52,7 @@ function generateLevel(currentType, types) {
 	let meta = {};
 	if (Math.random() > 0.3) {
 		meta = {
-			tags: ['red', 'green', 'blue', 'orange', 'magenta', 'brown', 'black'].filter(() => Math.random() > 0.9),
+			tags: ['red', 'green', 'blue', 'orange', 'magenta', 'brown', 'black'].filter(() => Math.random() > 0.95),
 			epts: (applicableEpts[currentType] || []).filter(() => Math.random() > 0.5)
 		};
 	}

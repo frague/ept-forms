@@ -1,17 +1,26 @@
 import React, { useState } from 'react'
 import { Form } from 'semantic-ui-react'
-import SelectionMenu from '../containers/SelectionMenu'
-import TransferMenu from '../containers/TransferMenu'
+import { eptsTypes } from '../GraphGenerator'
 
-export const Epts = ({epts, tags}) => {
+function EptSelection({ept, meta}) {
+	let initialState = (meta.epts || []).includes(ept);
+	let [isChecked, check] = useState(initialState);
+
+	let applicableTypes = eptsTypes[ept];
+	let isApplicable = applicableTypes.includes(meta.type);
+
+	return <span className={ isChecked !== initialState ? 'changed' : undefined }>
+		{isApplicable && <Form.Checkbox checked={ isChecked } onClick={ (e, {checked}) => check(checked) } /> }
+	</span>;
+}
+
+export const Epts = ({meta, selectedEpts}) => {
 	return <div>
 		<span>
-			{ (tags || []).join(', ') }
+			{ (meta.tags || []).join(', ') }
 		</span>
 		{
-			epts.map(ept => <span>
-				<Form.Checkbox />
-			</span>)
+			selectedEpts.map((ept, index) => <EptSelection key={ index } meta={ meta } ept={ ept } />)
 		}
 	</div>
 }

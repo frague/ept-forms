@@ -59,7 +59,13 @@ article {
               flex: 1 0 100px;
               padding: 2px 0 0 0;
               text-align: center;
-            }    
+            }
+
+            &.changed {
+              label:before {
+                background-color: #ff876c;
+              }
+            }
           }
         }        
       }

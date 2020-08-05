@@ -7,7 +7,10 @@ export const Navigation = ({ selectedEpts }) => {
 	let hasEptsSelected = (selectedEpts || []).length > 0;
 
 	return <div className='buttons'>
-		<Button icon labelPosition='left' onClick={ () => history.push("/batch", {epts: 'damn'}) } disabled={ !hasEptsSelected }>
+		<Button icon onClick={ () => history.push("/") }>
+			<Icon name='home' />
+		</Button>
+		<Button icon labelPosition='left' onClick={ () => history.push("/batch") } disabled={ !hasEptsSelected }>
 			<Icon name='sitemap' />
 			Batch Apply
 		</Button>
