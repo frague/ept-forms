@@ -21,7 +21,7 @@ export const Actions = ({isDisabled, data, selection, flushEpts, applyEpt}) => {
 		flush: () => flushEpts(selection)
 	};
 
-	return <div className="actions">
+	return <div className={ 'actions' + (isDisabled ? '' : ' sticky') }>
 		<Form>
 			<Form.Group inline>
 				<Form.Select label="With selected: " 
