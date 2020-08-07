@@ -1,8 +1,9 @@
 import { combineReducers } from 'redux';
 
 import { SELECT_ITEM, SELECT_CHILDREN, TRANSFER_EPTS, APPLY_EPT, 
-	FLUSH_EPTS, SELECT_EPT, SELECT_ALL_EPTS } from './actions';
-import { generate, deepClone } from '../GraphGenerator'
+	FLUSH_EPTS, SELECT_EPT, SELECT_ALL_EPTS, SET_EPT_APPLICATION,
+	APPLY_EPT_TO_CHILDREN } from './actions';
+import { generate, deepClone, eptsTypes } from '../GraphGenerator'
 
 function setState(structure, prefix, state, result, doRecursively=true) {
 	if (!structure.children) return result;
@@ -112,10 +113,47 @@ function selection(state={}, action) {
 	}
 }
 
+function setApplication(data, prefix, ept, state, collector, isRecursive) {
+	Object.entries(data.children || {}).forEach(([key, child]) => {
+		let applicableTypes = eptsTypes[ept] || [];
+		let isApplicable = applicableTypes.includes(child.meta.type);
+		let newPrefix = `${prefix}.${key}`;
+		if (isApplicable) {
+			let key = `${newPrefix}:${ept}`;
+			if (state === null) {
+				delete collector[key];
+			} else {
+				collector[key] = !!state;
+			}
+		}
+		if (isRecursive) setApplication(child, newPrefix, ept, state, collector, true);
+	});
+	return collector;
+}
+
+function applicationSelection(state={}, action) {
+	switch (action.type) {
+		case SET_EPT_APPLICATION:
+			let key = `${action.path}:${action.ept}`;
+			let result = Object.assign({}, state, {[key]: action.state});
+			if (action.state === null) {
+				delete result[key]
+			}
+			return result;
+		
+		case APPLY_EPT_TO_CHILDREN:
+			return setApplication(action.data, action.prefix, action.ept, action.state, Object.assign({}, state), action.state !== 1);
+
+		default:
+			return state;
+	}
+}
+
 const appReducer = combineReducers({
 	data,
 	selectedEpts,
-	selection
+	selection,
+	applicationSelection,
 });
 
 export default appReducer;

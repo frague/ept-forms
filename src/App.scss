@@ -52,6 +52,7 @@ article {
       li {
         & > div:nth-child(2) {
           span {
+            min-height: 21px;
 
             &:first-child {
               flex: 0 1 150px;
@@ -63,6 +64,14 @@ article {
               flex: 1 0 100px;
               padding: 2px 0 0 0;
               text-align: center;
+            }
+
+            div {
+              display: inline-block;
+
+              &.no-control {
+                width: 16px;
+              }
             }
 
             &.changed {
@@ -203,7 +212,7 @@ article {
       top: 0;
       left: 16px;
       z-index: 100;
-      min-width: 150px;
+      min-width: 170px;
       box-: 4px 4px 3px rgba(0, 0, 0, 0.4);
 
       li button {

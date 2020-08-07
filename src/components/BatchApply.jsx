@@ -3,7 +3,8 @@ import { Icon, Button } from 'semantic-ui-react'
 
 import Epts from '../containers/Epts'
 
-export const BatchApply = ({selection, data, selectedEpts}) => {
+export const BatchApply = ({applicationSelection, data, selectedEpts}) => {
+	let hasChanges = Object.keys(applicationSelection).length > 0;
 	return [
 		<h1>Batch EPT Application: { selectedEpts.join(', ') }</h1>,
 		<div className="application-points">
@@ -21,7 +22,7 @@ export const BatchApply = ({selection, data, selectedEpts}) => {
 				</li>
 				<Level key="top" data={ data } level={ 1 } name="Fabrique" epts={ selectedEpts } />
 			</ul>
-			<div className="buttons">
+			<div className={ 'actions buttons' + (hasChanges ? ' sticky' : '') }>
 				<Button>Apply Changes</Button>
 			</div>
 		</div>
@@ -50,7 +51,7 @@ const Level = ({data, level, name, epts}) => {
 								{ key }
 							</button>
 						</div>
-						<Epts meta={ nextLevel.meta } />
+						<Epts path={ id } data={ nextLevel } />
 					</li>,
 					isExpanded ? <Level key={ `${id}.${level} level` } data={ nextLevel } level={ 1 + level } name={ id } epts={ epts } /> : null
 				]

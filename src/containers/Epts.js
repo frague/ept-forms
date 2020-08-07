@@ -1,20 +1,22 @@
 import { connect } from 'react-redux'
 import { Epts } from '../components/Epts'
+import { setEptApplication } from '../store/actions'
 
 const mapStateToProps = state => {
   return {
-    selectedEpts: state.selectedEpts
+    selectedEpts: state.selectedEpts,
+    applicationSelection: state.applicationSelection,
   }
 }
 
-// const mapDispatchToProps = dispatch => {
-//   return {
-//     onSelectClick: (id, state) => {
-//       dispatch(selectItem(id, state))
-//     }
-//   }
-// }
+const mapDispatchToProps = dispatch => {
+  return {
+    onClick: (children, path, ept, state) => {
+      dispatch(setEptApplication(children, path, ept, state))
+    }
+  }
+}
 
-const EptsConnected = connect(mapStateToProps)(Epts)
+const EptsConnected = connect(mapStateToProps, mapDispatchToProps)(Epts)
 
 export default EptsConnected

@@ -4,7 +4,7 @@ import { BatchApply } from '../components/BatchApply'
 const mapStateToProps = state => {
   return {
   	data: state.data,
-    selection: state.selection,
+    applicationSelection: state.applicationSelection,
     selectedEpts: state.selectedEpts
   }
 }

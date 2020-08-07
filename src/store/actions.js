@@ -8,6 +8,9 @@ export const FLUSH_EPTS = 'FLUSH_EPTS';
 export const SELECT_EPT = 'SELECT_EPT';
 export const SELECT_ALL_EPTS = 'SELECT_ALL_EPTS';
 
+export const SET_EPT_APPLICATION = 'SET_EPT_APPLICATION';
+export const APPLY_EPT_TO_CHILDREN = 'APPLY_EPT_TO_CHILDREN';
+
 export function selectItem(id, state) {
 	return {
 		type: SELECT_ITEM,
@@ -54,5 +57,19 @@ export function selectAllEpts(epts, state) {
 	return {
 		type: SELECT_ALL_EPTS,
 		epts, state
+	}
+}
+
+export function setEptApplication(path, ept, state) {
+	return {
+		type: SET_EPT_APPLICATION,
+		path, ept, state
+	}
+}
+
+export function applyEptToChildren(data, prefix, ept, state) {
+	return {
+		type: APPLY_EPT_TO_CHILDREN,
+		data, prefix, ept, state
 	}
 }
